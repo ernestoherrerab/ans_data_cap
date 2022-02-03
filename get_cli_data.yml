@@ -1,0 +1,25 @@
+---
+
+- name: Set up Folders and files
+  hosts: localhost
+  connection: local
+
+  tasks:
+      
+     - name: Create a directory for captured data
+       file: path=parsed_data/ state=directory
+
+- name: Start Show Interfaces Playbook
+  hosts: ios
+  gather_facts: false
+  vars_prompt:
+    - name: "username"
+      prompt: "Username"
+      private: no
+
+    - name: "password"
+      prompt: "Password"
+      private: yes
+    
+  roles:
+    - data_fetch
